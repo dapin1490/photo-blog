@@ -6,3 +6,4 @@
 
 * 이미지 출처: [Lorem Picsum](https://picsum.photos/)
 * 배포: [netlify](https://www.netlify.com/)
+* favicon: [favicon.io](https://favicon.io/)
