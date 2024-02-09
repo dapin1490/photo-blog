@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<title>나만의 랜덤 이미지를 만들어보자</title>
+</head>
+<body>
+	<header>
+		<h1>랜덤 이미지</h1>
+	</header>
+	<main>
+		<div class="info">
+			<form>
+				<label for="width">가로 크기(px):</label>
+				<input type="number" id="width" name="width" placeholder="1600">
+				<br>
+				<label for="height">세로 크기(px):</label>
+				<input type="number" id="height" name="height" placeholder="900">
+				<br>
+				<label for="maxNum">최대 이미지 수:</label>
+				<input type="number" id="maxNum" name="maxNum" placeholder="10">
+			</form>
+			<label>현재 이미지 수:</label>
+			<label id="currentImgNum">0</label>
+		</div>
+		<div class="container">
+			<button id="generateBtn">새 이미지!</button>
+			<button id="deleteBtn">지우기</button>
+		</div>
+		<div id="gridContainer"></div>
+	</main>
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="./script.js"></script>
+</body>
+</html>
