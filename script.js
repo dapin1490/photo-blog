@@ -1,25 +1,38 @@
-const generateBtn = document.querySelector('#generateBtn');
-const gridContainer = document.querySelector('#gridContainer');
-const deleteBtn = document.querySelector('#deleteBtn');
-const currentImgNum = document.querySelector('#currentImgNum');
+const generateBtn = document.querySelector('#generateBtn'); // [새 이미지!]
+const gridContainer = document.querySelector('#gridContainer'); // 이미지 생성되는 곳
+const tooltipContainer = document.querySelector('#tooltipContainer'); // 툴팁 div
+const tooltipText = tooltipContainer.innerHTML; // 툴팁 HTML 텍스트
+const deleteBtn = document.querySelector('#deleteBtn'); // [지우기]
+const currentImgNum = document.querySelector('#currentImgNum'); // 현재 이미지 수
 
-generateBtn.addEventListener('click', () => {
-    var width = document.getElementById("width").value;
-    var height = document.getElementById("height").value;
-    var maxNum = document.getElementById("maxNum").value;
-    const rdNum = Math.floor(Math.random() * 1000) + 1; // 1 ~ 1000
+generateBtn.addEventListener('click', addImgs); // 이미지 추가
+deleteBtn.addEventListener('click', () => { // 이미지 삭제
+    gridContainer.innerHTML = ""; // 모든 내용 삭제
+    currentImgNum.textContent = 0; // 현재 이미지 수 업데이트
+    tooltipContainer.innerHTML = tooltipText; // 툴팁 보여주기
+});
 
-    if (width.trim() === "") {
-        width = 1600
+function addImgs() {
+    var width = document.getElementById("width").value; // 가로 크기
+    var height = document.getElementById("height").value; // 세로 크기
+    var maxNum = document.getElementById("maxNum").value; // 최대 이미지 수
+    const rdNum = Math.floor(Math.random() * 10000) + 1; // 1 ~ 10000 랜덤 이미지 번호
+
+    if (width.trim() === "") { // 가로 크기 기본값
+        width = 1600;
     }
-    if (height.trim() === "") {
-        height = 900
+    if (height.trim() === "") { // 세로 크기 기본값
+        height = 900;
     }
-    if (maxNum.trim() === "") {
-        maxNum = 10
+    if (maxNum.trim() === "") { // 최대 이미지 수 기본값
+        maxNum = 10;
     }
 
-    if (gridContainer.children.length >= maxNum) {
+    if (gridContainer.children.length == 0) { // 이미지 처음 생성시 툴팁 삭제
+        tooltipContainer.innerHTML = "";
+    }
+
+    if (gridContainer.children.length >= maxNum) { // 최대 이미지 수 도달시 생성하지 않고 경고
         const confirmed = confirm('모두 지우기?');
         if (confirmed) {
             deleteImgs();
@@ -27,25 +40,17 @@ generateBtn.addEventListener('click', () => {
         return;
     }
 
-    const rdUrl = `https://picsum.photos/${width}/${height}?random=${rdNum}` // 백틱 써야 함
+    const rdUrl = `https://picsum.photos/${width}/${height}?random=${rdNum}`; // 백틱 써야 함
     const img = document.createElement('img');
 
     img.src = rdUrl // 랜덤 이미지 생성 링크
-    gridContainer.appendChild(img);
-    currentImgNum.textContent = gridContainer.children.length;
+    gridContainer.appendChild(img); // 화면에 이미지 추가
+    currentImgNum.textContent = gridContainer.children.length; // 현재 이미지 수 입력
 
     // console.log(`w: ${width}, h: ${height}, number: ${rdNum}`);
     // alert(`w: ${width}, h: ${height}, number: ${rdNum}`);
-    // Toast 메시지 표시
-    showToast(`w: ${width}, h: ${height}, number: ${rdNum}`, "bg-info");
-});
-
-deleteBtn.addEventListener('click', deleteImgs);
-
-function deleteImgs() {
-    gridContainer.innerHTML = ""; // 모든 내용 삭제
-    currentImgNum.textContent = 0;
-}
+    showToast(`w: ${width}, h: ${height}, number: ${rdNum}`, "bg-info"); // Toast 메시지 표시
+};
 
 function showToast(message, bgColor) {
     // Toast 컨테이너 생성
