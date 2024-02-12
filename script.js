@@ -27,6 +27,10 @@ function addImgs() {
     if (maxNum.trim() === "") { // 최대 이미지 수 기본값
         maxNum = 10;
     }
+    else if (maxNum.trim() < 0) { // 최대 이미지 수가 음수일 경우 부호 반전
+        maxNum *= -1;
+        document.getElementById("maxNum").value = maxNum;
+    }
 
     if (gridContainer.children.length == 0) { // 이미지 처음 생성시 툴팁 삭제
         tooltipContainer.innerHTML = "";
