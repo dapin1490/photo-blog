@@ -6,11 +6,13 @@ const deleteBtn = document.querySelector('#deleteBtn'); // [지우기]
 const currentImgNum = document.querySelector('#currentImgNum'); // 현재 이미지 수
 
 generateBtn.addEventListener('click', addImgs); // 이미지 추가
-deleteBtn.addEventListener('click', () => { // 이미지 삭제
+deleteBtn.addEventListener('click', deleteImgs);
+
+function deleteImgs() {
     gridContainer.innerHTML = ""; // 모든 내용 삭제
     currentImgNum.textContent = 0; // 현재 이미지 수 업데이트
     tooltipContainer.innerHTML = tooltipText; // 툴팁 보여주기
-});
+}
 
 function addImgs() {
     var width = document.getElementById("width").value; // 가로 크기
